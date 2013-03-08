@@ -13,7 +13,6 @@
 
 @implementation AppDelegate
 
-@synthesize window = _window;
 @synthesize managedObjectContext = __managedObjectContext;
 @synthesize managedObjectModel = __managedObjectModel;
 @synthesize persistentStoreCoordinator = __persistentStoreCoordinator;
@@ -30,9 +29,9 @@
       
     // Since we are loading the data each time we run it we will have duplicate data
     // We will delete it each time at start in order to stop this
-    //[[DataSingleton sharedInstance] deleteAllObjects:@"Application"];
-    //[[DataSingleton sharedInstance] deleteAllObjects:@"Category"];
-    //[[DataSingleton sharedInstance] deleteAllObjects:@"Artist"];
+    [[DataSingleton sharedInstance] deleteAllObjects:@"Application"];
+    [[DataSingleton sharedInstance] deleteAllObjects:@"Category"];
+    [[DataSingleton sharedInstance] deleteAllObjects:@"Artist"];
     [[DataSingleton sharedInstance] loadDefaultData];
     
     return YES;
@@ -154,11 +153,11 @@
 }
 
 #pragma mark - Application's Documents directory
-
 // Returns the URL to the application's Documents directory.
 - (NSURL *)applicationDocumentsDirectory
 {
     return [[[NSFileManager defaultManager] URLsForDirectory:NSDocumentDirectory inDomains:NSUserDomainMask] lastObject];
 }
+
 
 @end

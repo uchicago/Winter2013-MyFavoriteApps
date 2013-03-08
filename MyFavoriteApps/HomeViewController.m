@@ -12,27 +12,24 @@
 #import "Artist.h"
 #import "Category.h"
 
+// Class Extension Methods /////////////////////////////////////////////////////
 @interface HomeViewController ()
 
 @end
 
+////////////////////////////////////////////////////////////////////////////////
 @implementation HomeViewController
 
 @synthesize fetchedResultsController = __fetchedResultsController;
 @synthesize managedObjectContext = __managedObjectContext;
 
-////////////////////////////////////////////////////////////////////////////////
-#pragma mark - Lifecycle
-////////////////////////////////////////////////////////////////////////////////
-- (id)initWithStyle:(UITableViewStyle)style
-{
-    self = [super initWithStyle:style];
-    if (self) {
-        // Custom initialization
-    }
-    return self;
-}
 
+#pragma mark - Lifecycle
+/*******************************************************************************
+ * @method          viewDidLoad
+ * @abstract
+ * @description
+ *******************************************************************************/
 - (void)viewDidLoad
 {
     [super viewDidLoad];
@@ -50,6 +47,11 @@
 	}
 }
 
+/*******************************************************************************
+ * @method          viewDidUnload
+ * @abstract
+ * @description
+ *******************************************************************************/
 - (void)viewDidUnload
 {
     [super viewDidUnload];
@@ -57,13 +59,12 @@
     // e.g. self.myOutlet = nil;
 }
 
-////////////////////////////////////////////////////////////////////////////////
+
 #pragma mark - Fetched results controller Delegate
-////////////////////////////////////////////////////////////////////////////////
 /*******************************************************************************
  * @method          fetchedResultsController
- * @abstract        <# Abstract #>
- * @description     <# Description #>
+ * @abstract
+ * @description
  ******************************************************************************/
 - (NSFetchedResultsController *)fetchedResultsController 
 {    
@@ -87,9 +88,14 @@
 	return self.fetchedResultsController;
 }    
 
-////////////////////////////////////////////////////////////////////////////////
+
 #pragma mark - Table view data source
-////////////////////////////////////////////////////////////////////////////////
+
+/*******************************************************************************
+ * @method          tableView:numberOfRowsInSection
+ * @abstract
+ * @description      
+ *******************************************************************************/
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     id <NSFetchedResultsSectionInfo> sectionInfo = [[self.fetchedResultsController sections] objectAtIndex:section];
@@ -115,9 +121,8 @@
     cell.textLabel.text = app.trackName;
 }
 
-////////////////////////////////////////////////////////////////////////////////
+
 #pragma mark - Section Index
-////////////////////////////////////////////////////////////////////////////////
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
     return [[self.fetchedResultsController sections] count];
@@ -133,16 +138,6 @@
 {
     return [self.fetchedResultsController sectionIndexTitles];
 }
-
-/*
-// Override to support conditional editing of the table view.
-- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    // Return NO if you do not want the specified item to be editable.
-    return YES;
-}
-*/
-
 
 /*******************************************************************************
  * @method          tableView:commitEditingStyle:
@@ -183,21 +178,6 @@
     }   
 }
 
-/*
-// Override to support rearranging the table view.
-- (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)fromIndexPath toIndexPath:(NSIndexPath *)toIndexPath
-{
-}
-*/
-
-/*
-// Override to support conditional rearranging of the table view.
-- (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    // Return NO if you do not want the item to be re-orderable.
-    return YES;
-}
-*/
 
 #pragma mark - Table view delegate
 
@@ -214,9 +194,21 @@
 
 #pragma mark - Search
 /*******************************************************************************
+ * @method          searchDisplayController
+ * @abstract        Search bar protocol delegate method
+ * @description
+ ******************************************************************************/
+- (BOOL)searchDisplayController:(UISearchDisplayController *)controller shouldReloadTableForSearchString:(NSString *)searchString
+{
+    NSLog(@"Search String:%@",searchString);
+    [self filterContentForSearchText:searchString scope:nil];
+    return YES;
+}
+
+/*******************************************************************************
  * @method          filterContentForSearchText:searchText scope:
- * @abstract        <# Abstract #>
- * @description     <# Description #>
+ * @abstract        Filter the store based on query
+ * @description
  ******************************************************************************/
 - (void)filterContentForSearchText:(NSString*)searchText scope:(NSString*)scope
 {
@@ -232,15 +224,5 @@
         NSLog(@"Error: %@", [error localizedDescription]);
 }
 
-/*******************************************************************************
- * @method          searchDisplayController
- * @abstract        <# Abstract #>
- * @description     <# Description #>
- ******************************************************************************/
-- (BOOL)searchDisplayController:(UISearchDisplayController *)controller shouldReloadTableForSearchString:(NSString *)searchString
-{
-    NSLog(@"Search String:%@",searchString);
-    [self filterContentForSearchText:searchString scope:nil];
-    return YES;
-}
+
 @end

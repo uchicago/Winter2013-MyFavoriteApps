@@ -11,11 +11,7 @@
 #import "Category.h"
 #import "Artist.h"
 
-//#import "GTMHTTPFetcher.h"
-
 @implementation DataSingleton
-
-@synthesize managedObjectContext;
 
 /*******************************************************************************
  * @method          sharedInstance
@@ -166,31 +162,6 @@
     return [[[NSFileManager defaultManager] URLsForDirectory:NSCachesDirectory inDomains:NSUserDomainMask] lastObject];
 }
 
-#pragma mark - API
-/*******************************************************************************
- * @method      downloadHome
- * @abstract    <# abstract #>
- * @description <# description #>
- *******************************************************************************/
-- (void)downloadHome 
-{/*
-    if (![self connectedWithMessage:nil]) return;
-    
-    NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@/home/",API_URL]];    
-    GTMHTTPFetcher* myFetcher = [GTMHTTPFetcher fetcherWithRequest:[NSURLRequest requestWithURL:url]];
-    [myFetcher beginFetchWithCompletionHandler:^(NSData *retrievedData, NSError *error) {
-		if (error != nil) {
-            DLog(@"ERROR:%@",error);
-		} else {
-            NSDictionary *json = [self jsonToDictionary:retrievedData forKey:nil];          
-            //DLog(@"%@",json);
-            [delegate requestHomeDataDidLoad:[json objectForKey:@"appoftheday"] 
-                             popularSearches:[json objectForKey:@"searches"]];		
-        }
-	}];
-    */
-}
-
 #pragma mark - Debugging Methods
 /*******************************************************************************
  * @method      dumpCategories
@@ -237,6 +208,6 @@
 {
     NSLog(@"Standard User Defaults:%@",[[NSUserDefaults standardUserDefaults] dictionaryRepresentation]);
 }
-@end
 
+@end
 

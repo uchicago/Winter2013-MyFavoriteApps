@@ -2,8 +2,8 @@
 //  Artist.h
 //  MyFavoriteApps
 //
-//  Created by T. Binkowski on 5/17/12.
-//  Copyright (c) 2012 University of Chicago. All rights reserved.
+//  Created by T. Andrew Binkowski on 2/28/13.
+//  Copyright (c) 2013 University of Chicago. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>
